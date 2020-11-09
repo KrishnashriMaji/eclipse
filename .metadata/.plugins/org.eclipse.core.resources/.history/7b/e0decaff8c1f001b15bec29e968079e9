@@ -1,0 +1,59 @@
+package class25_26;
+
+public class Showresult {
+
+	public static void main(String[] args) {
+		Linklist list = new Linklist();
+//		list.addLast(5);
+//		list.addLast(10);
+//		list.addLast(15);
+//		list.display();
+//		list.addFirst(3);
+//		list.addFirst(1);
+//		list.display();
+//		list.addAt(7, 3);
+//		list.display();
+//		list.removeFirst();
+//		list.display();
+	//	list.removeLast();
+	//	list.display();
+	//	list.removeAtIndex(2);
+	//	list.display();
+	//	System.out.println(list.isEmpty());
+	//	System.out.println(list.getSize());
+	//	list.reverseDI();
+		//list.display();
+//		list.reversePI();
+//		list.display();
+		
+		list.addLast(15);
+		list.addLast(110);
+		list.addLast(15);
+		list.addLast(11);
+		list.addLast(110);
+		list.addLast(5);
+//		System.out.println(list.isPalindrom());
+		list.reverse1();
+		list.display();
+		Linklist l1 = new Linklist();
+		l1.addLast(1);
+		l1.addLast(2);
+		l1.addLast(3);
+		l1.addLast(4);
+		l1.addLast(5);
+		Linklist l2 = new Linklist();
+		l2.addLast(2);
+		l2.addLast(4);
+		l2.addLast(5);
+		l2.addLast(6);
+		l2.addLast(7);
+		l2.addLast(8);
+		System.out.println(Linklist.mergeTwoSortedList2(l1,l2));
+		
+		
+		
+
+
+	}
+
+}

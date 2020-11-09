@@ -1,0 +1,33 @@
+package class31;
+
+public class Queue {
+	protected int front;
+	protected int rear;
+	int[] data;
+	protected int size;
+	Queue(int cap){
+		data = new int[cap];
+		this.front = -1;
+		this.rear = -1;
+	}
+	public void enqueue(int val) throws Exception{
+		
+		if(size ==  data.length) {
+			throw new Exception("Queue is full");
+		}
+		this.rear++;
+		this.rear = this.rear% data.length;
+		if(this.front == -1) {
+			this.front++;
+		}
+		this.size++;
+		
+	}
+	public int dequeue()throws Exception{
+		if(this.size == 0) {
+			throw new Exception("Queue is empty");
+		}
+		
+	}
+
+}

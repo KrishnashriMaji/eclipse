@@ -1,0 +1,10 @@
+package recursion2;
+
+public class Last_occurence {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

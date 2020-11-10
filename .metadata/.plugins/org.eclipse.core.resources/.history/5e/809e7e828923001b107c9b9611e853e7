@@ -1,0 +1,13 @@
+package class31;
+
+public class Test1 {
+
+	public static void main(String[] args) throws Exception {
+		Test ts = new Test(5);
+		ts.push(1);
+		ts.push(2);
+		ts.display();
+
+	}
+
+}

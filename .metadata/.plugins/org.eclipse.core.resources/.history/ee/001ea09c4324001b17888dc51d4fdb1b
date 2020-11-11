@@ -1,0 +1,70 @@
+package geekster;
+
+import java.util.Scanner;
+
+public class Class9 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("print size of array");
+		int size = sc.nextInt();
+		int[] arr = new int[size];
+		for(int i =0;i<arr.length;i++) {
+			arr[i] = sc.nextInt();
+		}
+		System.out.println("no of query");
+		int qu = sc.nextInt();
+		int[][] query = new int[qu][2];
+		for(int j=0;j<qu;j++) {
+			for(int k =0;k<2;k++) {
+				query[j][k]=sc.nextInt();
+			}
+		}
+		
+		//-------------sum between two point m times (worst case)------------------------------//
+//			int[] res = new int[qu];
+			
+//			for(int m=0;m<query.length;m++) {
+//				int sum = 0;
+//				for(int q=query[m][0];q<=query[m][1];q++) {
+//					sum += arr[q-1];
+//				}
+//				res[m] = sum;
+//			}
+//		
+//			for(int s:res) {
+//				System.out.print(s+" ");
+//			}
+			
+			//-----------------------------prefix sum approach-------------------------------------------//
+			int[] res = new int[qu];
+			for(int j=1;j<arr.length;j++) {
+				arr[j] = arr[j]+arr[j-1];
+			}
+			
+			for(int m=0;m<query.length;m++) {
+				//----------corner case------------//
+				
+				int start = query[m][0];
+				int end = query[m][1]-1;
+				
+				if(query[m][0] == 1) {
+					start = 0;
+					res[m] = arr[end];
+
+				}else {
+					start = start-2;
+					res[m] = arr[end]-arr[start];
+				}
+				
+			}
+			
+			for(int s:res) {
+				System.out.print(s+" ");
+			}
+			
+		
+
+	}
+
+}

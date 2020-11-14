@@ -62,15 +62,19 @@ public class Class9 {
 //			}
 			
 //			int[][] quries = {{2,6,8},{3,5,7},{1,8,1},{5,9,15}};
-			int[][] quries = {{1,2,100},{2,5,100},{3,4,100}};
-			System.out.println(arrayManipulation(5,quries));
+//			int[][] quries = {{1,2,100},{2,5,100},{3,4,100}};
+//			System.out.println(arrayManipulation(5,quries));
+//			
+//			int[] arr = {1,0,1,0,0,0,0,1,1,0};
+//			int[] res = binarySorting(arr);
+//			for(int s:res) {
+//				System.out.print(s+" ");
+//			}
 			
-			int[] arr = {1,0,1,0,0,0,0,1,1,0};
-			int[] res = binarySorting(arr);
-			for(int s:res) {
-				System.out.print(s+" ");
-			}
+			int[] biArr = {1,0,1,0,0,0,0,1,1,0};
+			binarySorting(biArr);
 	}
+	
 			
 	
 			//--------------------------------array manipulation(hacker rank)(worst case)----------------------------//
@@ -133,15 +137,27 @@ public class Class9 {
 			
 			//------------------------------binary sorting--------------------------------------------------//
 			
-			public static int[] binarySorting(int[] arr) {
-				for(int i = 0;i<arr.length-1;i++) {
-					if(arr[i]>arr[i+1]) {
-						int temp = arr[i];
-						arr[i] = arr[i+1];
-						arr[i+1] = temp;
+			public static void binarySorting(int[] arr) {
+				int left = 0;
+				int right = arr.length-1;
+				while(left<=right) {
+					
+					if(arr[left] != arr[right]) {
+						int temp = arr[left];
+						arr[left] = arr[right];
+						arr[right] = temp;
+					}
+					while(arr[left] != 1) {
+						left++;
+					}
+					while(arr[right]  != 0) {
+						right--;
 					}
 				}
-				return arr;
+				for(int a :arr) {
+					System.out.print(a+" ");
+				}
+				
 			}
 
 		

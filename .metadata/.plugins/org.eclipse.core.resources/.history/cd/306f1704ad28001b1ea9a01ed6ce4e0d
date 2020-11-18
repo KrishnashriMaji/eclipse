@@ -1,0 +1,30 @@
+package geekster;
+
+import java.util.*;
+
+public class Test {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Queue<Integer> q = new LinkedList<Integer>();
+        int size = sc.nextInt();
+        for(int i=0;i<size;i++){
+            q.add(sc.nextInt());
+        }
+        minMax(q);
+    }
+    public static void minMax(Queue<Integer> q){
+        if(q.size()>0){
+            int max = Integer.MIN_VALUE;
+            int min = Integer.MAX_VALUE;
+             while(q.size()!=0){
+                 int temp = q.remove();
+
+                 max = Math.max(temp,max);            
+                 min = Math.min(temp,min);
+             }
+            System.out.println(max+" "+min);
+//            System.out.println(q.size());
+        }
+    }
+}

@@ -1,0 +1,45 @@
+package class33;
+
+import java.util.*;
+
+public class Test1 {
+	class Node{
+		int data;
+		ArrayList<Node> children = new ArrayList<>();
+	}
+	private int size;
+	private Node root;
+	
+	Test1(int[] arr){
+		Stack<Node> st = new Stack<>();
+		
+		for(int i =0;i<arr.length;i++) {
+			if(arr[i] == -1) {
+				st.pop();
+			}else {
+				Node node = new Node();
+				node.data = arr[i];
+				this.size++;
+				if(st.size()>0) {
+					st.peek().children.add(node);
+				}else {
+					this.root = node;
+				}
+				st.push(node);
+			}
+		}
+		
+	}
+	
+	public void display() {
+		display(this.root);
+	}
+	
+	private void display(Node root) {
+		System.out.println(root.data);
+		for(Node n : root.children) {
+			System.out.println(n.data+" ");
+		}
+	}
+
+}

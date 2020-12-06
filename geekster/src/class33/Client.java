@@ -7,16 +7,19 @@ public class Client {
 				-1 };
 //		int[] arr = {10,20,-1,30,-1,40,-1,-1};
 		GenericTree gt = new GenericTree(arr);
-		gt.display();
-//		System.out.println(gt.find(1209));
-//		System.out.println(gt.nodeToRootPath(120));
 //		gt.display();
+//		System.out.println(gt.find(1209));
+//		System.out.println(gt.nodeToRootPath(70));
+		gt.removeLeaves();
+		gt.display();
 //		gt.preOrder();
 //		gt.postOrder();
 //		gt.levelOrder();
+//		gt.linarize();
 //		gt.levelOrderLineWise();
-		gt.printLevelOrderZigZag();
-
+//		gt.printLevelOrderZigZag();
+//		gt.mirror();
+//		gt.display();
 	}
 
 }

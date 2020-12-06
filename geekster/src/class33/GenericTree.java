@@ -219,30 +219,129 @@ public class GenericTree {
 	}
 	
 	public void printLevelOrderZigZag() {
-		Stack<Node> currentStack = new Stack<>();
+		Stack<Node> currStack = new Stack<Node>();
 		Stack<Node> nextStack = new Stack<>();
-		currentStack.push(this.root);
+		currStack.push(this.root);
 		int level = 0;
-		while(currentStack.size()>0) {
-			Node temp = currentStack.pop();
-			System.out.print(temp.data+" ");
-			if(level%2 == 0) {
-				for(int i =0;i<temp.children.size();i++) {
-					nextStack.push(temp.children.get(i));
+		while(currStack.size()>0) {
+			Node node = currStack.pop();
+			
+			System.out.print(node.data+" ");
+			if(level%2==0) {
+				for(int i=0;i<node.children.size();i++) {
+					nextStack.push(node.children.get(i));
 				}
 			}else {
-				for(int i =temp.children.size()-1;i>=0;i--) {
-					nextStack.push(temp.children.get(i));
+				for(int i=node.children.size()-1;i>=0;i--) {
+					nextStack.push(node.children.get(i));
 				}
 			}
-			if(currentStack.size() == 0) {
+			
+			if(currStack.size()==0) {
+				currStack = nextStack;
+				nextStack = new Stack<>();
 				System.out.println();
-				Stack<Node> ln3 = currentStack;
-				currentStack = nextStack;
-				nextStack = ln3;
+				level++;
 			}
 		}
+	}
+	
+	public void mirror1() {
+		LinkedList<Node> l1 = new LinkedList<>();
+		LinkedList<Node> l2 = new LinkedList<>();
+		l1.add(this.root);
+		while(l1.size()>0) {
+			Node node = l1.removeLast();
+			System.out.print(node.data+" ");
+			for(int i=node.children.size()-1;i>=0;i--) {
+				l2.addFirst(node.children.get(i));
+			}
+			if(l1.size()==0) {
+				l1 = l2;
+				l2 = new LinkedList<>();
+				System.out.println();
+			}
+		}
+	}
+	
+	public void mirror() {
+		mirror(root);
+	}
+	
+	private void mirror(Node root) {
+		for(Node n : root.children) {
+			mirror(n);
+		}
+		Collections.reverse(root.children);
+	}
+	public boolean symtric() {
+		Node r = this.root;
+		ArrayList<Node> ar1 = new ArrayList<>();
+		ArrayList<Node> ar2 = new ArrayList<>();
+		ar1.add(r);
+		while(ar1.size()>0) {
+			Node temp = ar1.remove(0);
+			for(int i=0;i<temp.children.size();i++) {
+				ar2.add(temp.children.get(i));
+			}
+			
+			if(ar1.size() == 0) {
+				ar1 = ar2;
+				ar2 = new ArrayList<>();
+			}
+			
+		}
+		return false;
 		
 	}
+	
+	
+
+	
+
+	public int LCA(int a,int b) {
+		//verify all conditions
+
+		// get path root to a aPath
+		ArrayList<Integer> aPath = nodeToRootPath(a);	
+		Collections.reverse(aPath);
+		// get path root to b bPath
+		ArrayList<Integer> bPath = nodeToRootPath(b);
+		Collections.reverse(bPath);
+		// compare the paths
+		int i = 0;
+		while(i < aPath.size() && i < bPath.size() && aPath.get(i) == bPath.get(i)) {
+			i++;
+		}
+
+		return aPath.get(i-1);
+	}
+
+	private void linearize(Node root) {
+		// linearise all node
+		for(Node child:root.children) {
+			linearize(child);
+		}
+
+		for(int i = root.children.size()-1;i>0;i--) {
+			Node lc = root.children.remove(i);
+			Node sl = root.children.get(i-1);
+			Node slTail = getTail(sl);
+			slTail.children.add(lc);
+		}
+
+	}
+	private Node getTail(Node node) {
+		Node temp = node;
+		while(temp.children.size() != 0) {
+			temp = temp.children.get(0);
+		}
+		return temp;
+	}
+
+	public void linarize() {
+		linearize(root);
+	}
+
 
 }

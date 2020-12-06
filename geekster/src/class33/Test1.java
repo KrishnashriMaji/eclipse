@@ -3,140 +3,170 @@ package class33;
 import java.util.*;
 
 public class Test1 {
-	class Node{
+	private class Node{
 		int data;
-		ArrayList<Node> children = new ArrayList<>();
+		ArrayList<Node> childreen = new ArrayList<>();
 	}
-	private int size;
-	private Node root;
-	
+	int size;
+	Node root;
 	Test1(int[] arr){
 		Stack<Node> st = new Stack<>();
-		
-		for(int i =0;i<arr.length;i++) {
+		for(int i=0;i<arr.length;i++) {
 			if(arr[i] == -1) {
 				st.pop();
 			}else {
-				Node node = new Node();
-				node.data = arr[i];
-				this.size++;
-				if(st.size()>0) {
-					st.peek().children.add(node);
-				}else {
-					this.root = node;
-				}
-				st.push(node);
+			Node node = new Node();
+			node.data = arr[i];
+			if(st.size()>0) {
+				st.peek().childreen.add(node);
+			}else {
+				this.root = node;
+			}
+			st.push(node);
 			}
 		}
-		
 	}
 	
 	public void display() {
 		display(this.root);
 	}
-	
 	private void display(Node root) {
-		System.out.print(root.data +"---->");
-		for(Node n : root.children) {
-			System.out.print(n.data+", ");
+		System.out.print(root.data + "-->");
+		for(Node child:root.childreen) {
+			System.out.print(child.data+",");
 		}
-		System.out.println(".");
-		for(Node c:root.children) {
-			display(c);
+		System.out.println();
+		for(Node child:root.childreen) {
+//			System.out.println(child.data);
+			display(child);
 		}
 	}
 	
-	public int size2() {
-		return size2(this.root);
+	public int size() {
+		return size(this.root);
 	}
-	private int size2(Node root) {
-		int size = 0;
-		for (Node child : root.children) {
-			int csize = size2(child);
-			size += csize;
+	private int size(Node node) {
+		int count = 0;
+		for(Node child:node.childreen) {
+			int temp = size(child);
+			count += temp;
 		}
-
-		size++;
-		return size;
+		count = count+1;
+		return count;
 	}
 	
 	public int max() {
 		return max(this.root);
 	}
-	private int max(Node root) {
-		int max = root.data;
-		for (Node child : root.children) {
-			int res = max(child);
-			max = Math.max(max, res);
+	private int max(Node node) {
+		int max = node.data;
+		for(Node child:node.childreen) {
+			int temp = max(child);
+			max  = Math.max(max, temp);
 		}
-
 		return max;
 	}
 	
-	public boolean find(int data) {
-		return find(this.root,data);
+	public boolean find(int num) {
+		return find(this.root,num);
 	}
-	private boolean find(Node n,int data) {
-		if(data == n.data) {
+	private boolean find(Node node,int num) {
+		if(node.data == num) {
 			return true;
 		}
-		for (Node child : n.children) {
-			boolean res = find(child,data);
-			if(res == true) {
-				return true;
-			}
+		boolean children = false;
+		for(Node child:node.childreen) {
+			 children = children || find(child,num);
 		}
-
-		return false;
+		return children;
 	}
 	
 	public int height() {
 		return height(this.root);
 	}
-	
-	private int height(Node n) {
-		int max =0;
-		for(Node c:n.children) {
-			int res = height(c);
-			max = Math.max(max, res);	
+	private int height(Node node) {
+		int max = 0;
+		for(Node child:node.childreen) {
+			int temp = height(child);
+			max  = Math.max(max, temp);
 		}
 		max++;
 		return max;
 	}
 	
-	public ArrayList<Integer> nodeToRootPath(int data){
-		return nodeToRootPath(this.root,data);
-	}
-	private ArrayList<Integer> nodeToRootPath(Node n,int data){
-		if(data == n.data) {
-			ArrayList<Integer> arr = new ArrayList<>();
-			arr.add(n.data);
-			return arr;
-		}
+	public ArrayList<Integer> nodeToRootPath(int num){
+		return nodeToRootPath(this.root,num);
 		
-		for(Node c:n.children) {
-			ArrayList<Integer> res = nodeToRootPath(c,data);
-			if(res != null) {
-				res.add(n.data);
-				return res;
+	}
+	private ArrayList<Integer> nodeToRootPath(Node node,int num){
+		if(node.data == num) {
+			ArrayList<Integer> ar = new ArrayList<>();
+			ar.add(node.data);
+			return ar;
+		} 
+		for(Node child:node.childreen) {
+			ArrayList<Integer> temp = nodeToRootPath(child,num);
+			if(temp.size()>0) {
+				temp.add(node.data);
+				return temp;
 			}
-			
 		}
-		return null;
+		return new ArrayList<>();
 	}
 	
 	public void removeLeave() {
 		removeLeave(this.root);
 	}
-	private void removeLeave(Node n) {
-		for(int i=n.children.size()-1;i>=0;i--) {
-			Node current = n.children.get(i);
-			if(current.children.size() ==0) {
-				n.children.remove(i);
+	private void removeLeave(Node node) {
+		for(int i=0;i<node.childreen.size();i++) {
+			Node temp = node.childreen.get(i);
+			if(temp.childreen.size() == 0) {
+				node.childreen.remove(temp);
 			}else {
-				removeLeave(current);
+				removeLeave(temp);
+			}
+		}
+		
+	}
+	
+	public void postOrder() {
+		postOrder(this.root);
+	}
+	private void postOrder(Node root) {
+		for(Node child:root.childreen) {
+			postOrder(child);
+		}
+		System.out.print( root.data+",");
+	}
+	
+	public void levelOrder() {
+		levelOrder(this.root);
+	}
+	
+	private void levelOrder(Node node) {
+		LinkedList<Node> l1 = new LinkedList<>();
+		LinkedList<Node> l2 = new LinkedList<>();
+		l1.add(node);
+		int level = 0;
+		while(l1.size()>0) {
+			Node temp = l1.removeLast();
+			System.out.print(temp.data+ " ");
+			if(level%2!=0) {
+				for(int i=temp.childreen.size()-1;i>=0;i--) {
+					l2.addLast(temp.childreen.get(i));
+				}
+			}else {
+				for(int i=0;i<temp.childreen.size();i++) {
+					l2.addLast(temp.childreen.get(i));
+				}
+			}
+			
+			if(l1.size() == 0) {
+				l1= l2;
+				l2 = new LinkedList<>();
+				System.out.println();
+				level++;
 			}
 		}
 	}
-	
 }

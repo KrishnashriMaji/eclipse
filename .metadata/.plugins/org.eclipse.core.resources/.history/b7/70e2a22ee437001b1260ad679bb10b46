@@ -1,0 +1,14 @@
+package class44_hashmap_build;
+
+public class Test<K,V> {
+	
+	private class HMnode{
+		K key;
+		V value;
+		
+		public HMnode(K key,V value){
+			this.key = key;
+			this.value = value;
+		}
+	}
+}

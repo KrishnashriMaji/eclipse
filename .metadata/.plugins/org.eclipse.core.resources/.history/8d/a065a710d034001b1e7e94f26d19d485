@@ -1,0 +1,33 @@
+package class_41;
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+public class Client {
+
+	public static void main(String[] args) {
+		Heap h = new Heap();
+        h.add(10);
+        h.add(30);
+        h.add(9);
+        h.add(15);
+        h.add(40);
+        h.display();
+        System.out.println();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(10);
+        pq.add(30);
+        pq.add(9);
+        pq.add(15);
+        pq.add(40);
+        pq.remove();
+        System.out.println(pq.peek());
+        System.out.println(pq.poll());
+        Iterator it = pq.iterator();
+        while(it.hasNext()){
+        	System.out.print(it.next()+" ");
+        }
+       
+	}
+
+}

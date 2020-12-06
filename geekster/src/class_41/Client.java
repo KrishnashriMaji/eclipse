@@ -1,0 +1,89 @@
+package class_41;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+public class Client {
+
+	public static void main(String[] args) {
+		Heap h = new Heap();
+        h.add(10);
+        h.add(30);
+        h.add(9);
+        h.add(15);
+        h.add(40);
+        h.display();
+        System.out.println();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(10);
+        pq.add(30);
+        pq.add(9);
+        pq.add(15);
+        pq.add(40);
+        pq.remove();  // only remove
+        System.out.println(pq.peek()); //   peek value
+        System.out.println(pq.poll()); // remove and return
+        Iterator it = pq.iterator();
+        while(it.hasNext()){
+        	System.out.print(it.next()+" ");
+        }
+        System.out.println("-------");
+//        int[] nums = {3,2,3,1,2,4,5,5,6};
+//       System.out.println(findKthLargest(nums,4));
+//        int[] nums = {4,3,2,6,5,7,1,2};
+        int[] nums = {4,3,2,6};
+       System.out.println(nRopes(nums));
+       
+        MedianPQ m = new MedianPQ();
+		m.add(10);
+		System.out.println(m.peek());
+		m.add(100);
+		System.out.println(m.peek());
+		m.add(90);
+		System.out.println(m.peek());
+		m.add(80);
+		System.out.println(m.peek());
+		m.add(110);
+		System.out.println(m.peek());
+		m.add(105);
+		System.out.println(m.peek());
+		m.add(120);
+		System.out.println(m.peek());
+		
+	}
+	
+	public static int nRopes(int[] nums) {
+		 PriorityQueue<Integer> pq = new PriorityQueue<Integer>(Collections.reverseOrder());  // max priority
+	        for(int i=0;i<nums.length;i++){
+	            pq.add(nums[i]);
+	        }
+	        System.out.println(pq.peek());
+	        int cost = 0;
+        while(pq.size() >1) {
+            
+        	int temp1 = pq.poll();
+        	int temp2 = pq.poll();
+        	int sum = temp1+temp2;
+    		cost += sum;
+            pq.add(sum);
+        }
+        return cost;
+	}
+	 public static int findKthLargest(int[] nums, int k) {
+	        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+	        for(int i=0;i<k;i++){
+	            pq.add(nums[i]);
+	        }
+	        for(int j=k;j<nums.length;j++){
+	            if(pq.peek()<nums[j]){
+	                pq.remove();
+	                pq.add(nums[j]);
+	            }
+	        }
+	        return pq.peek();
+	        
+	    }
+
+}

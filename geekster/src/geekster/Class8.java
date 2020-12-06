@@ -14,9 +14,9 @@ public class Class8 {
 //		val = 10;
 //		bizz(val);
 		
-//		int[] arr = {-2,-3,4,-1,-2,1,5,-3};
+		int[] arr = {-2,-3,4,-1,-2,1,5,-3};
 //		int[] arr = {-2,-1,-3};
-//		System.out.println(maxsubArray(arr));
+		System.out.println(maxsubArray(arr));
 
 	}
 	

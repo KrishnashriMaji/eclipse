@@ -1,0 +1,32 @@
+package class_41;
+
+import java.util.ArrayList;
+
+public class Test {
+	ArrayList<Integer> arr = new ArrayList<>();
+	
+	public void add(int data) {
+		arr.add(data);
+		upheapify(arr.size()-1);
+	}
+	public void upheapify(int ci) {
+		if(ci == 0) {
+			return;
+		}
+		int pi = (ci-1)/2;
+		if(isHP(ci,pi)) {
+			swap(ci,pi);
+			upheapify(pi);
+		}
+	}
+	public boolean isHP(int ci,int pi) {
+		return arr.get(ci)>arr.get(pi);
+	}
+	public void swap(int ci,int pi) {
+		int child = arr.get(ci);
+		int parent = arr.get(pi);
+		arr.set(ci, parent);
+		arr.set(pi, child);
+	}
+	
+}

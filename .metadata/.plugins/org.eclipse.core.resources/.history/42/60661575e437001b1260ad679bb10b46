@@ -1,0 +1,23 @@
+package class44_hashmap_build;
+
+import java.util.LinkedList;
+
+public class Test<K,V> {
+	
+	private class HMnode{
+		K key;
+		V value;
+		
+		public HMnode(K key,V value){
+			this.key = key;
+			this.value = value;
+		}
+	}
+	private LinkedList<HMnode>[] buckets;
+	private int size;
+	
+	public Test() {
+		buckets = new LinkedList[4];
+		
+	}
+}

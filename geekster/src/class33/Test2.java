@@ -7,8 +7,10 @@ public class Test2 {
 				-1 };
 		Test1 t = new Test1(arr);
 //		t.display();
-		t.removeLeave();
-		t.display();
+//		t.removeLeave();
+//		t.linearize();
+//		t.removeLeave();
+		t.levelOrder();
 		
 
 	}

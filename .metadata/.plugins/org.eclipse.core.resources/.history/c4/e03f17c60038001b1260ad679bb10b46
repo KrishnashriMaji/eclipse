@@ -1,0 +1,32 @@
+package class43_hashmap;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Test {
+
+	public static void main(String[] args) {
+//		highestFrequenceyCharacter("geekster");
+
+		int[] one = { 5, 1, 3, 1, 2, 2, 1 };
+		int[] two = { 2, 2, 4, 1, 1, 5, 2 };
+		getCommonElements2(one, two);
+
+	}
+	
+	public static void getCommonElements2(int[] arr1,int[] arr2) {
+		HashMap<Integer,Integer> hasMap = new HashMap<>();
+		for(int i =0;i<arr1.length;i++) {
+			hasMap.put(i, hasMap.getOrDefault(i, 0)+1);
+		}
+		ArrayList<Integer> arr = new ArrayList<>(hasMap.keySet());
+		
+		for(int a:arr) {
+			System.out.println(hasMap.containsKey(a));
+		}
+				//		for(int j=0;j<arr2.length;j++) {
+//			if(hasMap.)
+//		}
+	}
+
+}

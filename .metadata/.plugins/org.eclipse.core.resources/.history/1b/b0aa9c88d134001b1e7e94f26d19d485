@@ -1,0 +1,49 @@
+package class_41;
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+public class Client {
+
+	public static void main(String[] args) {
+		Heap h = new Heap();
+        h.add(10);
+        h.add(30);
+        h.add(9);
+        h.add(15);
+        h.add(40);
+        h.display();
+        System.out.println();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.add(10);
+        pq.add(30);
+        pq.add(9);
+        pq.add(15);
+        pq.add(40);
+        pq.remove();  // only remove
+        System.out.println(pq.peek()); //   peek value
+        System.out.println(pq.poll()); // remove and return
+        Iterator it = pq.iterator();
+        while(it.hasNext()){
+        	System.out.print(it.next()+" ");
+        }
+        int[] nums = {3,2,1,5,6,4};
+       System.out.println(findKthLargest(nums,3));
+	}
+	
+	 public static int findKthLargest(int[] nums, int k) {
+	        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+	        for(int i=0;i<k;i++){
+	            pq.add(nums[i]);
+	        }
+	        for(int j=k;j<nums.length;j++){
+	            if(pq.peek()<nums[j]){
+	                pq.remove();
+	                pq.add(nums[j]);
+	            }
+	        }
+	        return pq.peek();
+	        
+	    }
+
+}
